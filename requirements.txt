@@ -8,5 +8,4 @@ pydantic==2.9.2
 pandas==2.2.3
 pgvector==0.3.6
 openpyxl==3.1.5
-sentence-transformers==3.1.1
 python-multipart==0.0.12

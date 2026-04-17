@@ -4,8 +4,7 @@ import logging
 from datetime import datetime
 from app.db.session import SessionLocal
 from app.db.models import Incident
-from app.services.embedding_service import model
-
+from app.services.embedding_service import generate_embedding
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -54,7 +53,7 @@ def import_incidents_from_file(file_path: str):
 
             # embedding
             text_for_embedding = f"{description} {resolution}"
-            embedding = model.encode(text_for_embedding).tolist()
+            embedding = generate_embedding(text_for_embedding)
             incident = Incident(
                 machine_id=machine_id,
                 description=description,

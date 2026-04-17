@@ -10,7 +10,7 @@ from app.db.models import Incident
 from app.db.session import SessionLocal
 from app.schemas.incident import IncidentCreate, IncidentResponse, SemanticSearchRequest
 from app.services.semantic_search import search_similar_incidents
-from app.services.embedding_service import model
+from app.services.embedding_service import generate_embedding
 
 router = APIRouter()
 
@@ -30,8 +30,7 @@ def create_incident(
 ):
     # Generate and store a pgvector embedding for semantic retrieval.
     text_for_embedding = f"{incident.description} {incident.resolution}"
-    embedding = model.encode(text_for_embedding)
-    embedding_list = embedding.tolist()
+    embedding_list = generate_embedding(text_for_embedding)
 
     new_incident = Incident(
         machine_id=incident.machine_id,
