@@ -15,7 +15,7 @@ class Incident(Base):
     severity = Column(String)
     description = Column(Text)
     resolution = Column(Text)
-    embedding = Column(Vector(384), nullable=True)
+    embedding = Column(Vector(1536), nullable=True)
     timestamp = Column(DateTime, default=datetime.utcnow)  # type: ignore
     location = Column(String, nullable=True)
     downtime_minutes = Column(Integer, nullable=True)
