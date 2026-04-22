@@ -3,13 +3,9 @@ from app.db.session import SessionLocal
 from app.services.embedding_service import generate_embedding
 
 def search_similar_incidents(query: str, top_k: int = 5):
-    """
-    Find the top-k incidents by L2 distance between the query embedding and
-    stored pgvector embeddings (same metric as the previous FAISS IndexFlatL2).
-    """
     db = SessionLocal()
     try:
-        query_embedding = generate_embedding(query)
+        query_embedding = list(generate_embedding(query))
 
         results = (
             db.query(Incident)
